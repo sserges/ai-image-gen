@@ -1,6 +1,9 @@
 function onSubmit(e) {
   e.preventDefault()
 
+  document.querySelector('.msg').textContent = ''
+  document.querySelector('#image').src = ''
+
   const prompt = document.querySelector('#prompt').value
   const size = document.querySelector('#size').value
 
@@ -31,8 +34,12 @@ async function generateImageRequest(prompt, size) {
       throw new Error('That image could not be generated')
     }
 
-    const data = await response.json()
-    console.log(data)
+    const result = await response.json()
+    // console.log(data)
+
+    const imageUrl = result.data
+
+    document.querySelector('#image').src = imageUrl
 
     removeSpinner()
   } catch (error) {
