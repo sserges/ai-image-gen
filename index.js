@@ -1,3 +1,4 @@
+const path = require('path')
 const express = require('express')
 const dotenv = require('dotenv').config()
 
@@ -12,6 +13,9 @@ app.use(
     extended: false,
   })
 )
+
+// Set static folder
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/openai', require('./routes/openaiRoutes'))
 
